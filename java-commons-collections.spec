@@ -1,12 +1,12 @@
 Summary:	Jakarta Commons Collections - Java Collections enhancements
 Summary(pl):	Jakarta Commons Collections - rozszerzenia Java Collections
 Name:		jakarta-commons-collections
-Version:	2.1
+Version:	3.0
 Release:	1
 License:	Apache
 Group:		Development/Languages/Java
-Source0:	http://jakarta.apache.org/builds/jakarta-commons/release/commons-collections/v%{version}/commons-collections-%{version}-src.tar.gz
-# Source0-md5:	ee30c02b1b57693f72cd86c899b925d9
+Source0:	http://www.apache.org/dist/jakarta/commons/collections/source/commons-collections-%{version}-src.zip
+# Source0-md5:	33a73020b7d9db59576909abba32a900
 URL:		http://jakarta.apache.org/
 BuildRequires:	jakarta-ant
 Requires:	jre
@@ -35,25 +35,25 @@ Jakarta Commons Collections documentation.
 Dokumentacja do Jakarta Commons Collections.
 
 %prep
-%setup -q -n commons-collections-%{version}-src
+%setup -q -n commons-collections-%{version}
 
 %build
+echo 'junit.jar=/usr/share/java/junit.jar' > build.properties
 ant dist
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_javalibdir}
 
-install dist/*.jar $RPM_BUILD_ROOT%{_javalibdir}
+install build/*.jar $RPM_BUILD_ROOT%{_javalibdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc dist/*.txt
 %{_javalibdir}/*.jar
 
 %files doc
 %defattr(644,root,root,755)
-%doc dist/docs dist/*.html
+%doc build/docs
