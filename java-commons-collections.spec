@@ -36,7 +36,7 @@ Dokumentacja do Jakarta Commons Collections.
 %setup -q -n commons-collections-%{version}
 
 %build
-echo 'junit.jar=/usr/share/java/junit.jar' > build.properties
+echo 'junit.jar=%{_datadir}/java/junit.jar' > build.properties
 ant jar javadoc
 
 %install
