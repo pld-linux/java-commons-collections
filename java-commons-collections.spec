@@ -44,6 +44,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_javadir}
 
 install build/*.jar $RPM_BUILD_ROOT%{_javadir}
+ln -sf commons-collections-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/commons-collections.jar
 
 %clean
 rm -rf $RPM_BUILD_ROOT
