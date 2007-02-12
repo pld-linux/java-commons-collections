@@ -1,5 +1,5 @@
 Summary:	Jakarta Commons Collections - Java Collections enhancements
-Summary(pl):	Jakarta Commons Collections - rozszerzenia Java Collections
+Summary(pl.UTF-8):   Jakarta Commons Collections - rozszerzenia Java Collections
 Name:		jakarta-commons-collections
 Version:	3.1
 Release:	1
@@ -17,19 +17,19 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 The Collections package contains a set of Java classes that extend or
 augment the Java Collections Framework.
 
-%description -l pl
-Pakiet Collections zawiera zestaw klas Javy rozszerzaj±cych lub
-powiêkszaj±cych szkielet Java Collections.
+%description -l pl.UTF-8
+Pakiet Collections zawiera zestaw klas Javy rozszerzajÄ…cych lub
+powiÄ™kszajÄ…cych szkielet Java Collections.
 
 %package doc
 Summary:	Jakarta Commons Collections documentation
-Summary(pl):	Dokumentacja do Jakarta Commons Collections
+Summary(pl.UTF-8):   Dokumentacja do Jakarta Commons Collections
 Group:		Development/Languages/Java
 
 %description doc
 Jakarta Commons Collections documentation.
 
-%description doc -l pl
+%description doc -l pl.UTF-8
 Dokumentacja do Jakarta Commons Collections.
 
 %prep
