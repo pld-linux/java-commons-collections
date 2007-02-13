@@ -1,5 +1,5 @@
 Summary:	Jakarta Commons Collections - Java Collections enhancements
-Summary(pl.UTF-8):   Jakarta Commons Collections - rozszerzenia Java Collections
+Summary(pl.UTF-8):	Jakarta Commons Collections - rozszerzenia Java Collections
 Name:		jakarta-commons-collections
 Version:	3.1
 Release:	1
@@ -23,7 +23,7 @@ powiększających szkielet Java Collections.
 
 %package doc
 Summary:	Jakarta Commons Collections documentation
-Summary(pl.UTF-8):   Dokumentacja do Jakarta Commons Collections
+Summary(pl.UTF-8):	Dokumentacja do Jakarta Commons Collections
 Group:		Development/Languages/Java
 
 %description doc
