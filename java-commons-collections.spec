@@ -9,6 +9,8 @@ Source0:	http://www.apache.org/dist/jakarta/commons/collections/source/commons-c
 # Source0-md5:	2da710d9c81ae85ee3a386e7ed1b1fe8
 URL:		http://jakarta.apache.org/commons/collections/
 BuildRequires:	ant
+BuildRequires:	jpackage-utils
+BuildRequires:	rpmbuild(macros) >= 1.300
 Requires:	jre
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -37,7 +39,7 @@ Dokumentacja do Jakarta Commons Collections.
 
 %build
 echo 'junit.jar=%{_datadir}/java/junit.jar' > build.properties
-ant jar javadoc
+%ant jar javadoc
 
 %install
 rm -rf $RPM_BUILD_ROOT
