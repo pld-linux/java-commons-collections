@@ -3,7 +3,7 @@ Summary:	Jakarta Commons Collections - Java Collections enhancements
 Summary(pl.UTF-8):	Jakarta Commons Collections - rozszerzenia Java Collections
 Name:		jakarta-commons-collections
 Version:	3.1
-Release:	1.1
+Release:	1.2
 License:	Apache
 Group:		Development/Languages/Java
 Source0:	http://www.apache.org/dist/jakarta/commons/collections/source/commons-collections-%{version}-src.tar.gz
@@ -70,7 +70,7 @@ ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name} # ghost symlink
 
 # source code
 install -d $RPM_BUILD_ROOT%{_prefix}/src/%{name}-%{version}
-cp -a src/* $RPM_BUILD_ROOT%{_prefix}/src/%{name}-%{version}
+cp -a src $RPM_BUILD_ROOT%{_prefix}/src/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
