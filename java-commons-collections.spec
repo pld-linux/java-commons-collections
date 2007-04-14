@@ -40,12 +40,16 @@ Dokumentacja do Jakarta Commons Collections.
 
 %package source
 Summary:	Jakarta Commons Collections source code
+Summary(pl.UTF-8):	Kod źródłowy Jakarta Commons Collections
 Group:		Development/Languages/Java
 AutoReq:	no
 AutoProv:	no
 
 %description source
 Jakarta Commons Collections source code.
+
+%description source -l pl.UTF-8
+Kod źródłowy Jakarta Commons Collections.
 
 %prep
 %setup -q -n commons-collections-%{version}
