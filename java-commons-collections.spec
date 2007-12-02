@@ -3,11 +3,12 @@ Summary:	Jakarta Commons Collections - Java Collections enhancements
 Summary(pl.UTF-8):	Jakarta Commons Collections - rozszerzenia Java Collections
 Name:		jakarta-commons-collections
 Version:	3.1
-Release:	2
+Release:	3
 License:	Apache
 Group:		Development/Languages/Java
 Source0:	http://www.apache.org/dist/jakarta/commons/collections/source/commons-collections-%{version}-src.tar.gz
 # Source0-md5:	2da710d9c81ae85ee3a386e7ed1b1fe8
+Source1:	%{name}-tomcat5-build.xml
 URL:		http://jakarta.apache.org/commons/collections/
 BuildRequires:	ant
 BuildRequires:	jpackage-utils
@@ -38,27 +39,26 @@ Jakarta Commons Collections documentation.
 %description javadoc -l pl.UTF-8
 Dokumentacja do Jakarta Commons Collections.
 
-%package source
-Summary:	Jakarta Commons Collections source code
-Summary(pl.UTF-8):	Kod źródłowy Jakarta Commons Collections
+%package tomcat5
+Summary:	Collection dependency for Tomcat5
 Group:		Development/Languages/Java
-AutoReq:	no
-AutoProv:	no
+Obsoletes:	jakarta-commons-collections-source
 
-%description source
-Jakarta Commons Collections source code.
-
-%description source -l pl.UTF-8
-Kod źródłowy Jakarta Commons Collections.
+%description tomcat5
+Collections dependency for Tomcat5
 
 %prep
 %setup -q -n commons-collections-%{version}
+cp %{SOURCE1} tomcat5-build.xml
 
 %build
 cat <<EOF > build.properties
 junit.jar=$(build-classpath junit)
 EOF
 %ant jar javadoc
+
+# commons-collections-tomcat5
+%ant -f tomcat5-build.xml
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -67,14 +67,13 @@ install -d $RPM_BUILD_ROOT%{_javadir}
 install build/commons-collections-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/commons-collections-%{version}.jar
 ln -sf commons-collections-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/commons-collections.jar
 
+install collections-tomcat5/commons-collections-tomcat5.jar $RPM_BUILD_ROOT%{_javadir}/%{name}-tomcat5-%{version}.jar
+ln -sf %{name}-tomcat5-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}-tomcat5.jar
+
 # javadoc
 install -d $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
 cp -a build/docs/apidocs/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
 ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name} # ghost symlink
-
-# source code
-install -d $RPM_BUILD_ROOT%{_prefix}/src/%{name}-%{version}
-cp -a src $RPM_BUILD_ROOT%{_prefix}/src/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -84,13 +83,15 @@ ln -sf %{name}-%{version} %{_javadocdir}/%{name}
 
 %files
 %defattr(644,root,root,755)
-%{_javadir}/*.jar
+%{_javadir}/commons-collections.jar
+%{_javadir}/commons-collections-%{version}.jar
+
+%files tomcat5
+%defattr(0644,root,root,0755)
+%{_javadir}/%{name}-tomcat5.jar
+%{_javadir}/%{name}-tomcat5-%{version}.jar
 
 %files javadoc
 %defattr(644,root,root,755)
 %{_javadocdir}/%{name}-%{version}
 %ghost %{_javadocdir}/%{name}
-
-%files source
-%defattr(644,root,root,755)
-%{_prefix}/src/%{name}-%{version}
