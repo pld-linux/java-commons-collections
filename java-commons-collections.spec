@@ -3,7 +3,7 @@ Summary:	Jakarta Commons Collections - Java Collections enhancements
 Summary(pl.UTF-8):	Jakarta Commons Collections - rozszerzenia Java Collections
 Name:		jakarta-commons-collections
 Version:	3.1
-Release:	4
+Release:	4.1
 License:	Apache
 Group:		Development/Languages/Java
 Source0:	http://www.apache.org/dist/jakarta/commons/collections/source/commons-collections-%{version}-src.tar.gz
@@ -72,8 +72,8 @@ install -d $RPM_BUILD_ROOT%{_javadir}
 install build/commons-collections-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/commons-collections-%{version}.jar
 ln -sf commons-collections-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/commons-collections.jar
 
-install collections-tomcat5/commons-collections-tomcat5.jar $RPM_BUILD_ROOT%{_javadir}/%{name}-tomcat5-%{version}.jar
-ln -sf %{name}-tomcat5-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}-tomcat5.jar
+install collections-tomcat5/commons-collections-tomcat5.jar $RPM_BUILD_ROOT%{_javadir}/commons-collections-tomcat5-%{version}.jar
+ln -sf commons-collections-tomcat5-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/commons-collections-tomcat5.jar
 
 # javadoc
 install -d $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
@@ -93,8 +93,8 @@ ln -sf %{name}-%{version} %{_javadocdir}/%{name}
 
 %files tomcat5
 %defattr(644,root,root,755)
-%{_javadir}/%{name}-tomcat5.jar
-%{_javadir}/%{name}-tomcat5-%{version}.jar
+%{_javadir}/commons-collections-tomcat5.jar
+%{_javadir}/commons-collections-tomcat5-%{version}.jar
 
 %files javadoc
 %defattr(644,root,root,755)
