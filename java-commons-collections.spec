@@ -3,17 +3,19 @@ Summary:	Jakarta Commons Collections - Java Collections enhancements
 Summary(pl.UTF-8):	Jakarta Commons Collections - rozszerzenia Java Collections
 Name:		jakarta-commons-collections
 Version:	3.1
-Release:	3
+Release:	4
 License:	Apache
 Group:		Development/Languages/Java
 Source0:	http://www.apache.org/dist/jakarta/commons/collections/source/commons-collections-%{version}-src.tar.gz
 # Source0-md5:	2da710d9c81ae85ee3a386e7ed1b1fe8
 Source1:	%{name}-tomcat5-build.xml
+Patch0:		%{name}-target.patch
 URL:		http://jakarta.apache.org/commons/collections/
 BuildRequires:	ant
 BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
+BuildRequires:	sed >= 4.0
 Requires:	jre
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -49,7 +51,10 @@ Collections dependency for Tomcat5
 
 %prep
 %setup -q -n commons-collections-%{version}
+%{__sed} -i -e 's,\r$,,' build.xml
+%patch0 -p1
 cp %{SOURCE1} tomcat5-build.xml
+find -name '*.jar' | xargs rm -vf
 
 %build
 cat <<EOF > build.properties
@@ -87,7 +92,7 @@ ln -sf %{name}-%{version} %{_javadocdir}/%{name}
 %{_javadir}/commons-collections-%{version}.jar
 
 %files tomcat5
-%defattr(0644,root,root,0755)
+%defattr(644,root,root,755)
 %{_javadir}/%{name}-tomcat5.jar
 %{_javadir}/%{name}-tomcat5-%{version}.jar
 
