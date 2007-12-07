@@ -3,7 +3,7 @@ Summary:	Jakarta Commons Collections - Java Collections enhancements
 Summary(pl.UTF-8):	Jakarta Commons Collections - rozszerzenia Java Collections
 Name:		jakarta-commons-collections
 Version:	3.1
-Release:	4.1
+Release:	5
 License:	Apache
 Group:		Development/Languages/Java
 Source0:	http://www.apache.org/dist/jakarta/commons/collections/source/commons-collections-%{version}-src.tar.gz
