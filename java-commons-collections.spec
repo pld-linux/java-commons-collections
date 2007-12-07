@@ -1,16 +1,18 @@
+# TODO
+# - rename to apache-commons-collections?
 %include	/usr/lib/rpm/macros.java
 Summary:	Jakarta Commons Collections - Java Collections enhancements
 Summary(pl.UTF-8):	Jakarta Commons Collections - rozszerzenia Java Collections
 Name:		jakarta-commons-collections
-Version:	3.1
-Release:	5
+Version:	3.2
+Release:	1
 License:	Apache
 Group:		Development/Languages/Java
-Source0:	http://www.apache.org/dist/jakarta/commons/collections/source/commons-collections-%{version}-src.tar.gz
-# Source0-md5:	2da710d9c81ae85ee3a386e7ed1b1fe8
+Source0:	http://www.apache.org/dist/commons/collections/source/commons-collections-%{version}-src.tar.gz
+# Source0-md5:	dbf80727b384bfb9c220d78af30ebc14
 Source1:	%{name}-tomcat5-build.xml
 Patch0:		%{name}-target.patch
-URL:		http://jakarta.apache.org/commons/collections/
+URL:		http://commons.apache.org/collections/
 BuildRequires:	ant
 BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
@@ -50,16 +52,13 @@ Obsoletes:	jakarta-commons-collections-source
 Collections dependency for Tomcat5
 
 %prep
-%setup -q -n commons-collections-%{version}
+%setup -q -n commons-collections-%{version}-src
 %{__sed} -i -e 's,\r$,,' build.xml
 %patch0 -p1
 cp %{SOURCE1} tomcat5-build.xml
 find -name '*.jar' | xargs rm -vf
 
 %build
-cat <<EOF > build.properties
-junit.jar=$(build-classpath junit)
-EOF
 %ant jar javadoc
 
 # commons-collections-tomcat5
