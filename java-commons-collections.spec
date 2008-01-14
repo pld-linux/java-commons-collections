@@ -1,8 +1,8 @@
 # TODO
 # - rename to apache-commons-collections?
 %include	/usr/lib/rpm/macros.java
-Summary:	Jakarta Commons Collections - Java Collections enhancements
-Summary(pl.UTF-8):	Jakarta Commons Collections - rozszerzenia Java Collections
+Summary:	Commons Collections - Java Collections enhancements
+Summary(pl.UTF-8):	Commons Collections - rozszerzenia Java Collections
 Name:		jakarta-commons-collections
 Version:	3.2
 Release:	2
@@ -30,26 +30,30 @@ augment the Java Collections Framework.
 Pakiet Collections zawiera zestaw klas Javy rozszerzających lub
 powiększających szkielet Java Collections.
 
+%package tomcat5
+Summary:	Commons Collections dependency for Tomcat5
+Summary(pl.UTF-8):	Elementy Commons Collections dla Tomcata 5
+Group:		Development/Languages/Java
+Obsoletes:	jakarta-commons-collections-source
+
+%description tomcat5
+Commons Collections dependency for Tomcat5.
+
+%description tomcat5 -l pl.UTF-8
+Elementy Commons Collections dla Tomcata 5.
+
 %package javadoc
-Summary:	Jakarta Commons Collections documentation
-Summary(pl.UTF-8):	Dokumentacja do Jakarta Commons Collections
+Summary:	Commons Collections documentation
+Summary(pl.UTF-8):	Dokumentacja do Commons Collections
 Group:		Documentation
 Requires:	jpackage-utils
 Obsoletes:	jakarta-commons-collections-doc
 
 %description javadoc
-Jakarta Commons Collections documentation.
+Commons Collections documentation.
 
 %description javadoc -l pl.UTF-8
-Dokumentacja do Jakarta Commons Collections.
-
-%package tomcat5
-Summary:	Collection dependency for Tomcat5
-Group:		Development/Languages/Java
-Obsoletes:	jakarta-commons-collections-source
-
-%description tomcat5
-Collections dependency for Tomcat5
+Dokumentacja do Commons Collections.
 
 %prep
 %setup -q -n commons-collections-%{version}-src
