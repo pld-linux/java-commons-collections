@@ -1,5 +1,7 @@
-# TODO
-# - rename to apache-commons-collections?
+#
+# Conditional build:
+%bcond_without	javadoc		# don't build javadoc
+
 %include	/usr/lib/rpm/macros.java
 Summary:	Commons Collections - Java Collections enhancements
 Summary(pl.UTF-8):	Commons Collections - rozszerzenia Java Collections
@@ -7,17 +9,19 @@ Name:		jakarta-commons-collections
 Version:	3.2
 Release:	2
 License:	Apache
-Group:		Development/Languages/Java
+Group:		Libraries/Java
 Source0:	http://www.apache.org/dist/commons/collections/source/commons-collections-%{version}-src.tar.gz
 # Source0-md5:	dbf80727b384bfb9c220d78af30ebc14
-Source1:	%{name}-tomcat5-build.xml
-Patch0:		%{name}-target.patch
+Source1:	jakarta-commons-collections-tomcat5-build.xml
+Patch0:		jakarta-commons-collections-target.patch
 URL:		http://commons.apache.org/collections/
 BuildRequires:	ant
 BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
 BuildRequires:	sed >= 4.0
+Obsoletes:	jakarta-commons-collections
+Provides:	jakarta-commons-collections
 Requires:	jre
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -63,7 +67,7 @@ cp %{SOURCE1} tomcat5-build.xml
 find -name '*.jar' | xargs rm -vf
 
 %build
-%ant jar javadoc
+%ant jar %{?with_javadoc:javadoc}
 
 # commons-collections-tomcat5
 %ant -f tomcat5-build.xml
@@ -79,9 +83,11 @@ install collections-tomcat5/commons-collections-tomcat5.jar $RPM_BUILD_ROOT%{_ja
 ln -sf commons-collections-tomcat5-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/commons-collections-tomcat5.jar
 
 # javadoc
+%if %{with javadoc}
 install -d $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
 cp -a build/docs/apidocs/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
 ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name} # ghost symlink
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -99,7 +105,9 @@ ln -sf %{name}-%{version} %{_javadocdir}/%{name}
 %{_javadir}/commons-collections-tomcat5.jar
 %{_javadir}/commons-collections-tomcat5-%{version}.jar
 
+%if %{with javadoc}
 %files javadoc
 %defattr(644,root,root,755)
 %{_javadocdir}/%{name}-%{version}
 %ghost %{_javadocdir}/%{name}
+%endif
