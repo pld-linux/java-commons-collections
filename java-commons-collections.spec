@@ -5,7 +5,7 @@
 %include	/usr/lib/rpm/macros.java
 Summary:	Commons Collections - Java Collections enhancements
 Summary(pl.UTF-8):	Commons Collections - rozszerzenia Java Collections
-Name:		jakarta-commons-collections
+Name:		java-commons-collections
 Version:	3.2
 Release:	2
 License:	Apache
