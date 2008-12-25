@@ -20,9 +20,9 @@ BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
 BuildRequires:	sed >= 4.0
-Obsoletes:	jakarta-commons-collections
-Provides:	jakarta-commons-collections
 Requires:	jre
+Provides:	jakarta-commons-collections
+Obsoletes:	jakarta-commons-collections
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -38,7 +38,9 @@ powiększających szkielet Java Collections.
 Summary:	Commons Collections dependency for Tomcat5
 Summary(pl.UTF-8):	Elementy Commons Collections dla Tomcata 5
 Group:		Development/Languages/Java
+Provides:	jakarta-commons-collections-tomcat5
 Obsoletes:	jakarta-commons-collections-source
+Obsoletes:	jakarta-commons-collections-tomcat5
 
 %description tomcat5
 Commons Collections dependency for Tomcat5.
@@ -51,7 +53,9 @@ Summary:	Commons Collections documentation
 Summary(pl.UTF-8):	Dokumentacja do Commons Collections
 Group:		Documentation
 Requires:	jpackage-utils
+Provides:	jakarta-commons-collections-javadoc
 Obsoletes:	jakarta-commons-collections-doc
+Obsoletes:	jakarta-commons-collections-javadoc
 
 %description javadoc
 Commons Collections documentation.
