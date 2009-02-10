@@ -3,11 +3,13 @@
 %bcond_without	javadoc		# don't build javadoc
 
 %include	/usr/lib/rpm/macros.java
+
+%define		srcname	commons-collections
 Summary:	Commons Collections - Java Collections enhancements
 Summary(pl.UTF-8):	Commons Collections - rozszerzenia Java Collections
 Name:		java-commons-collections
 Version:	3.2
-Release:	2
+Release:	3
 License:	Apache
 Group:		Libraries/Java
 Source0:	http://www.apache.org/dist/commons/collections/source/commons-collections-%{version}-src.tar.gz
@@ -16,11 +18,11 @@ Source1:	jakarta-commons-collections-tomcat5-build.xml
 Patch0:		jakarta-commons-collections-target.patch
 URL:		http://commons.apache.org/collections/
 BuildRequires:	ant
+BuildRequires:	java-gcj-compat-devel
 BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
 BuildRequires:	sed >= 4.0
-Requires:	jre
 Provides:	jakarta-commons-collections
 Obsoletes:	jakarta-commons-collections
 BuildArch:	noarch
@@ -71,47 +73,52 @@ cp %{SOURCE1} tomcat5-build.xml
 find -name '*.jar' | xargs rm -vf
 
 %build
-%ant jar %{?with_javadoc:javadoc}
+%ant -Dbuild.compiler=extJavac jar
+
+%if %{with javadoc}
+export SHELL=/bin/sh
+%ant javadoc
+%endif
 
 # commons-collections-tomcat5
-%ant -f tomcat5-build.xml
+%ant -Dbuild.compiler=extJavac -f tomcat5-build.xml
 
 %install
 rm -rf $RPM_BUILD_ROOT
 # jars
 install -d $RPM_BUILD_ROOT%{_javadir}
-install build/commons-collections-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/commons-collections-%{version}.jar
-ln -sf commons-collections-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/commons-collections.jar
+install build/%{srcname}-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{srcname}-%{version}.jar
+ln -sf %{srcname}-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{srcname}.jar
 
-install collections-tomcat5/commons-collections-tomcat5.jar $RPM_BUILD_ROOT%{_javadir}/commons-collections-tomcat5-%{version}.jar
-ln -sf commons-collections-tomcat5-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/commons-collections-tomcat5.jar
+install collections-tomcat5/%{srcname}-tomcat5.jar $RPM_BUILD_ROOT%{_javadir}/%{srcname}-tomcat5-%{version}.jar
+ln -sf %{srcname}-tomcat5-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{srcname}-tomcat5.jar
 
 # javadoc
 %if %{with javadoc}
-install -d $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
-cp -a build/docs/apidocs/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
-ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name} # ghost symlink
+install -d $RPM_BUILD_ROOT%{_javadocdir}/%{srcname}-%{version}
+cp -a build/docs/apidocs/* $RPM_BUILD_ROOT%{_javadocdir}/%{srcname}-%{version}
+ln -s %{srcname}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{srcname} # ghost symlink
 %endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post javadoc
-ln -sf %{name}-%{version} %{_javadocdir}/%{name}
+ln -sf %{srcname}-%{version} %{_javadocdir}/%{srcname}
 
 %files
 %defattr(644,root,root,755)
-%{_javadir}/commons-collections.jar
-%{_javadir}/commons-collections-%{version}.jar
+%{_javadir}/%{srcname}.jar
+%{_javadir}/%{srcname}-%{version}.jar
 
 %files tomcat5
 %defattr(644,root,root,755)
-%{_javadir}/commons-collections-tomcat5.jar
-%{_javadir}/commons-collections-tomcat5-%{version}.jar
+%{_javadir}/%{srcname}-tomcat5.jar
+%{_javadir}/%{srcname}-tomcat5-%{version}.jar
 
 %if %{with javadoc}
 %files javadoc
 %defattr(644,root,root,755)
-%{_javadocdir}/%{name}-%{version}
-%ghost %{_javadocdir}/%{name}
+%{_javadocdir}/%{srcname}-%{version}
+%ghost %{_javadocdir}/%{srcname}
 %endif
