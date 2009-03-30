@@ -39,7 +39,7 @@ powiększających szkielet Java Collections.
 %package tomcat5
 Summary:	Commons Collections dependency for Tomcat5
 Summary(pl.UTF-8):	Elementy Commons Collections dla Tomcata 5
-Group:		Development/Languages/Java
+Group:		Libraries/Java
 Provides:	jakarta-commons-collections-tomcat5
 Obsoletes:	jakarta-commons-collections-source
 Obsoletes:	jakarta-commons-collections-tomcat5
