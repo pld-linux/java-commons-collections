@@ -1,6 +1,11 @@
 #
 # Conditional build:
 %bcond_without	javadoc		# don't build javadoc
+%if "%{pld_release}" == "ti"
+%bcond_without	java_sun	# build with gcj
+%else
+%bcond_with	java_sun	# build with java-sun
+%endif
 
 %include	/usr/lib/rpm/macros.java
 
@@ -10,7 +15,7 @@ Summary(pl.UTF-8):	Commons Collections - rozszerzenia Java Collections
 Name:		java-commons-collections
 Version:	3.2
 Release:	3
-License:	Apache
+License:	Apache v2.0
 Group:		Libraries/Java
 Source0:	http://www.apache.org/dist/commons/collections/source/commons-collections-%{version}-src.tar.gz
 # Source0-md5:	dbf80727b384bfb9c220d78af30ebc14
@@ -18,8 +23,10 @@ Source1:	jakarta-commons-collections-tomcat5-build.xml
 Patch0:		jakarta-commons-collections-target.patch
 URL:		http://commons.apache.org/collections/
 BuildRequires:	ant
-BuildRequires:	java-gcj-compat-devel
+%{!?with_java_sun:BuildRequires:	java-gcj-compat-devel}
+%{?with_java_sun:BuildRequires:	java-sun}
 BuildRequires:	jpackage-utils
+BuildRequires:	rpm >= 4.4.9-56
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
 BuildRequires:	sed >= 4.0
@@ -73,15 +80,10 @@ cp %{SOURCE1} tomcat5-build.xml
 find -name '*.jar' | xargs rm -vf
 
 %build
-%ant -Dbuild.compiler=extJavac jar
-
-%if %{with javadoc}
-export SHELL=/bin/sh
-%ant javadoc
-%endif
+%ant jar %{?with_javadoc:javadoc}
 
 # commons-collections-tomcat5
-%ant -Dbuild.compiler=extJavac -f tomcat5-build.xml
+%ant -f tomcat5-build.xml
 
 %install
 rm -rf $RPM_BUILD_ROOT
