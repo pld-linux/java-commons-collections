@@ -7,12 +7,12 @@
 Summary:	Commons Collections - Java Collections enhancements
 Summary(pl.UTF-8):	Commons Collections - rozszerzenia Java Collections
 Name:		java-commons-collections
-Version:	3.2
-Release:	3
+Version:	3.2.1
+Release:	1
 License:	Apache v2.0
 Group:		Libraries/Java
 Source0:	http://www.apache.org/dist/commons/collections/source/commons-collections-%{version}-src.tar.gz
-# Source0-md5:	dbf80727b384bfb9c220d78af30ebc14
+# Source0-md5:	031ce05872ddb0462f0dcce1e5babbe9
 Source1:	jakarta-commons-collections-tomcat5-build.xml
 Patch0:		jakarta-commons-collections-target.patch
 URL:		http://commons.apache.org/collections/
