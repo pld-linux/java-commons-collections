@@ -1,14 +1,14 @@
 #
 # Conditional build:
 %bcond_without	javadoc		# don't build javadoc
-%include	/usr/lib/rpm/macros.java
 
 %define		srcname	commons-collections
+%include	/usr/lib/rpm/macros.java
 Summary:	Commons Collections - Java Collections enhancements
 Summary(pl.UTF-8):	Commons Collections - rozszerzenia Java Collections
 Name:		java-commons-collections
 Version:	3.2.1
-Release:	1
+Release:	2
 License:	Apache v2.0
 Group:		Libraries/Java
 Source0:	http://www.apache.org/dist/commons/collections/source/commons-collections-%{version}-src.tar.gz
@@ -22,7 +22,6 @@ BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
 BuildRequires:	sed >= 4.0
-Provides:	jakarta-commons-collections
 Obsoletes:	jakarta-commons-collections
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -39,7 +38,6 @@ powiększających szkielet Java Collections.
 Summary:	Commons Collections dependency for Tomcat5
 Summary(pl.UTF-8):	Elementy Commons Collections dla Tomcata 5
 Group:		Libraries/Java
-Provides:	jakarta-commons-collections-tomcat5
 Obsoletes:	jakarta-commons-collections-source
 Obsoletes:	jakarta-commons-collections-tomcat5
 
@@ -54,7 +52,6 @@ Summary:	Commons Collections documentation
 Summary(pl.UTF-8):	Dokumentacja do Commons Collections
 Group:		Documentation
 Requires:	jpackage-utils
-Provides:	jakarta-commons-collections-javadoc
 Obsoletes:	jakarta-commons-collections-doc
 Obsoletes:	jakarta-commons-collections-javadoc
 
