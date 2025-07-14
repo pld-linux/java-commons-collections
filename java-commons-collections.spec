@@ -63,7 +63,7 @@ Dokumentacja do Commons Collections.
 %prep
 %setup -q -n commons-collections-%{version}-src
 %{__sed} -i -e 's,\r$,,' build.xml
-%patch0 -p1
+%patch -P0 -p1
 cp %{SOURCE1} tomcat5-build.xml
 find -name '*.jar' | xargs rm -vf
 
